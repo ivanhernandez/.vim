@@ -2,12 +2,15 @@ lspconfig = require'lspconfig'
 nlualsp = require'nlua.lsp.nvim'
 fluttertools = require'flutter-tools'
 
+local home = vim.fn.expand("$HOME")
 local pid = vim.fn.getpid()
 
 lspconfig.bashls.setup{}
 --lspconfig.denols.setup{}
 --lspconfig.dockerls.setup{}
-lspconfig.elmls.setup{}
+lspconfig.elmls.setup{
+    cmd = { "elm-language-server.cmd" }
+}
 fluttertools.setup{}
 lspconfig.gopls.setup{}
 lspconfig.jsonls.setup {
@@ -34,6 +37,12 @@ lspconfig.nimls.setup{}
 --lspconfig.omnisharp.setup{
 --    cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
 --}
+lspconfig.rescriptls.setup {
+    cmd = { "node", home .. "/.vim/plugged/vim-rescript/server/out/server.js", "--stdio" },
+    -- on_attach = function(client, bufnr)
+    --     require "lsp_signature".on_attach()
+    -- end,
+}
 lspconfig.rls.setup {
   settings = {
     rust = {

@@ -1,7 +1,10 @@
 filetype plugin indent on
+
 set backspace=indent,eol,start
-set hidden confirm 
+set hidden confirm
 set incsearch hlsearch
+autocmd InsertEnter * set nohlsearch
+autocmd InsertLeave * set hlsearch
 set ignorecase smartcase
 set number relativenumber
 set scrolloff=5
@@ -21,7 +24,9 @@ source ~/.vim/keybindings.vim
 let NERDTreeQuitOnOpen=1
 let g:BASH_Ctrl_j = 'off'
 
-set termguicolors guifont=Victor\ Mono:h18
+set termguicolors
+set guifont=Victor\ Mono:h18
+"set cursorline
 
 let g:curswtheme = "default"
 function SwitchDarkLightThemes()
@@ -29,17 +34,22 @@ if g:curswtheme == "dark"
     let g:curswtheme="light"
     set background=light
     colorscheme duochrome
+    hi Comment gui=italic guifg=#c18401
+    hi Boolean gui=italic guifg=#B6D6F6 
+    hi Keyword gui=italic guifg=#303030
+    hi link csComment Comment
+    hi link csXmlTag Comment
     redraw
 elseif g:curswtheme == "light"
-    let g:curswtheme="bruin"
+    let g:curswtheme="pompeii"
     set background=light
-    source ~/.vim/colors/bruin.vim
+    colorscheme pompeii
     redraw
-else
+else 
     let g:curswtheme="dark"
     set background=dark
     colorscheme bogster
-    hi Comment gui=italic guifg=#627d9d     
+    hi Comment gui=italic guifg=#627d9d
     hi Boolean gui=italic guifg=#59dcb7
     hi Keyword gui=italic guifg=#dcb659
     hi Search guibg=#9ea4c2
@@ -49,12 +59,37 @@ else
 endif
 endfunction
 
-call SwitchDarkLightThemes()
 syntax on
+call SwitchDarkLightThemes()
 
 if has("nvim")
     lua require('gitsigns').setup()
+    lua require('which-key').setup()
 endif
 
+function! SynStack()
+    if !exists("*synstack")
+        echoerr "Not available. Unsupported 'syntack'."
+        return
+    endif
+    let stack = synstack(line('.'), col('.'))
+    if len(stack) == 0
+        echo "No syntax group under cursor."
+        return
+    endif
+    let chainTail = synIDattr(synIDtrans(stack[-1]), "name")
+    let chain = map(stack, 'synIDattr(v:val, "name")')
+    echo join(chain, "->") . "=>" . chainTail
+endfunc
 
-
+function IncreaseFontSize(changeAmount)
+   let l:fontsize=&guifont[stridx(&guifont, ':h')+2:]
+   let l:fontname=&guifont[0:stridx(&guifont, ':h')+1]
+   let l:newfontsize=l:fontsize+a:changeAmount
+   let l:newfont=l:fontname.l:newfontsize
+   if exists(":GuiFont")
+       :execute 'GuiFont! '.l:newfont
+   else
+       :execute 'set guifont='.escape(l:newfont," ")
+   endif
+endfunction

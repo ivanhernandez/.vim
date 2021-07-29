@@ -18,16 +18,18 @@ endif
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " Themes
+Plug 'ivanhernandez/pompeii'
 Plug 'wojciechkepka/bogster' 
 Plug 'sdothum/vim-colors-duochrome'
 
 " Niceties
 Plug 'folke/which-key.nvim'
 Plug 'ap/vim-css-color'
-Plug 'nicwest/vim-http'
 Plug 'lambdalisue/gina.vim'
+Plug 'nicwest/vim-http'
 if has("nvim")
-Plug 'lewis6991/gitsigns.nvim'
+    " Plug 'NTBBloodbath/rest.nvim'
+    Plug 'lewis6991/gitsigns.nvim'
 endif
 
 " Auto Completion/LSP 
@@ -36,7 +38,7 @@ if has("nvim")
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'glepnir/lspsaga.nvim'
-" DOES NOT WORK Plug 'ray-x/lsp_signature.nvim'
+" Plug 'ray-x/lsp_signature.nvim'
 endif
 
 " Log files
@@ -47,8 +49,12 @@ Plug 'tjdevries/nlua.nvim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 " Go
 Plug 'fatih/vim-go'
+Plug 'sebdah/vim-delve'
 " FLutter
+Plug 'dart-lang/dart-vim-plugin'
 Plug 'akinsho/flutter-tools.nvim'
+" Rescript
+Plug 'rescript-lang/vim-rescript'
 " Rust
 Plug 'rust-lang/rust.vim'
 " V

@@ -52,6 +52,11 @@ nnoremap <C-P>w :Windows<CR>
 endif
 
 nnoremap <silent> <C-P><C-X> :call SwitchDarkLightThemes()<CR>
+nnoremap <silent> <Leader>x :call SynStack()<CR>h 
+if has("nvim")
+    nnoremap <silent> <C--> :call IncreaseFontSize(-1)<CR>
+    nnoremap <silent> <C-=> :call IncreaseFontSize(1)<CR>
+endif
 
 nnoremap <C-G><C-G> :Gina<space>
 nnoremap <C-G>a :Gina add %<CR>
@@ -88,21 +93,4 @@ if has("nvim")
     inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
     inoremap <silent><expr> <C-b>     compe#scroll({ 'delta': -4 })
 endif
-
-function! SynStack() 
-    if !exists("*synstack")
-        echoerr "Not available. Unsupported 'syntack'."
-        return
-    endif
-    let stack = synstack(line('.'), col('.'))
-    if len(stack) == 0
-        echo "No syntax group under cursor."
-        return
-    endif
-    let chainTail = synIDattr(synIDtrans(stack[-1]), "name")
-    let chain = map(stack, 'synIDattr(v:val, "name")')
-    echo join(chain, "->") . "=>" . chainTail
-endfunc
-nnoremap <silent> <Leader>x :call SynStack()<CR>h 
-
 
