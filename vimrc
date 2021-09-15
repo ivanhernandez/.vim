@@ -34,11 +34,6 @@ if g:curswtheme == "dark"
     let g:curswtheme="light"
     set background=light
     colorscheme duochrome
-    hi Comment gui=italic guifg=#c18401
-    hi Boolean gui=italic guifg=#B6D6F6 
-    hi Keyword gui=italic guifg=#303030
-    hi link csComment Comment
-    hi link csXmlTag Comment
     redraw
 elseif g:curswtheme == "light"
     let g:curswtheme="pompeii"
