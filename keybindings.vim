@@ -108,5 +108,9 @@ if has("nvim")
     inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
     inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
     inoremap <silent><expr> <C-b>     compe#scroll({ 'delta': -4 })
+
+    nnoremap <silent><C-k><C-i> :Lspsaga hover_doc<CR>
+    nnoremap <silent><C-k><C-s> :Lspsaga signature_help<CR>
+    nnoremap <silent><C-k><C-f> :Lspsaga lsp_finder<CR>
 endif
 
