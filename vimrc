@@ -25,31 +25,33 @@ let NERDTreeQuitOnOpen=1
 let g:BASH_Ctrl_j = 'off'
 
 set termguicolors
-set guifont=Victor\ Mono:h18
-"set cursorline
+set guifont=Victor\ Mono:h13
+set cursorline
+augroup CursorLineOnlyInActiveWindow
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END
+
+command ChangeToCurrentBufferDirectory cd %:p:h
+cabbrev cdc ChangeToCurrentBufferDirectory
 
 let g:curswtheme = "default"
 function SwitchDarkLightThemes()
-if g:curswtheme == "dark"
+if g:curswtheme == "default"
     let g:curswtheme="light"
-    set background=light
-    colorscheme duochrome
-    redraw
-elseif g:curswtheme == "light"
-    let g:curswtheme="pompeii"
     set background=light
     colorscheme pompeii
     redraw
-else 
+elseif g:curswtheme == "light"
     let g:curswtheme="dark"
     set background=dark
+    colorscheme pompeii
+    redraw
+else 
+    let g:curswtheme="default"
+    set background=dark
     colorscheme bogster
-    hi Comment gui=italic guifg=#627d9d
-    hi Boolean gui=italic guifg=#59dcb7
-    hi Keyword gui=italic guifg=#dcb659
-    hi Search guibg=#9ea4c2
-    hi link csComment Comment
-    hi link csXmlTag Comment
     redraw
 endif
 endfunction

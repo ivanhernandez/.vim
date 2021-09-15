@@ -3,8 +3,24 @@ let mapleader = "\<Space>"
 let g:camelcasemotion_key = '<leader>'
 nnoremap <silent> <leader><esc> <esc>:noh<CR>:echo ""<CR>
 nnoremap <silent> <C-Tab> :bnext<CR>
-nnoremap <silent> <C-Backspace> diwi
-inoremap <silent> <C-Backspace> <esc>diwi
+
+
+" Remove previous word. Do not yank.
+nnoremap <silent> <C-Backspace> :undojoin<CR>"_db
+inoremap <silent> <C-Backspace> <C-w>
+" No yank for single character deletions. Explicit yanking with leader key.
+" or in visual mode when substituting selection
+nnoremap <leader>x x
+nnoremap <leader>X X
+nnoremap x "_x
+nnoremap X "_X
+" No yank when pasting over selection. Explicit yanking with leader.
+vnoremap <leader>p p
+vnoremap p "_dP
+" Avoid yanking with leader key for deletions 
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
 
 nnoremap <silent> <leader>/ :Commentary<Esc>
 vnoremap <silent> <leader>/ :Commentary<Esc>
