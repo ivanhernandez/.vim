@@ -26,6 +26,7 @@ Plug 'sdothum/vim-colors-duochrome'
 Plug 'folke/which-key.nvim'
 Plug 'ap/vim-css-color'
 Plug 'lambdalisue/gina.vim'
+Plug 'sindrets/diffview.nvim'
 Plug 'nicwest/vim-http'
 if has("nvim")
     " Plug 'NTBBloodbath/rest.nvim'
