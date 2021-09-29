@@ -1,5 +1,7 @@
 filetype plugin indent on
 
+set nocompatible
+
 set backspace=indent,eol,start
 set hidden confirm
 set incsearch hlsearch

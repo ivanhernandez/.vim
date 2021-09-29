@@ -41,24 +41,27 @@ Plug 'glepnir/lspsaga.nvim'
 " Plug 'ray-x/lsp_signature.nvim'
 endif
 
+" Lots of syntax files
+Plug 'sheerun/vim-polyglot'
+
 " Log files
-Plug 'MTDL9/vim-log-highlighting'
+"POLYGLOT Plug 'MTDL9/vim-log-highlighting'
 " Lua
 Plug 'tjdevries/nlua.nvim'
 " Markdown -- depends on node and yarn
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 " Go
-Plug 'fatih/vim-go'
+"POLYGLOT PPlug 'fatih/vim-go'
 Plug 'sebdah/vim-delve'
 " FLutter
-Plug 'dart-lang/dart-vim-plugin'
+"POLYGLOT PPlug 'dart-lang/dart-vim-plugin'
 Plug 'akinsho/flutter-tools.nvim'
 " Rescript
 Plug 'rescript-lang/vim-rescript'
 " Rust
-Plug 'rust-lang/rust.vim'
+"POLYGLOT PPlug 'rust-lang/rust.vim'
 " V
-Plug 'ollykel/v-vim'
+"POLYGLOT PPlug 'ollykel/v-vim'
 Plug 'zakuro9715/vim-vtools' 
 
 call plug#end()
