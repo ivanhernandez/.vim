@@ -5,7 +5,15 @@ fluttertools = require'flutter-tools'
 local home = vim.fn.expand("$HOME")
 local pid = vim.fn.getpid()
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+
 lspconfig.bashls.setup{}
+lspconfig.cssls.setup { 
+    capabilities = capabilities,
+    cmd = { "vscode-css-language-server.cmd", "--stdio" }
+}
 --lspconfig.denols.setup{}
 --lspconfig.dockerls.setup{}
 lspconfig.elmls.setup{
@@ -13,6 +21,10 @@ lspconfig.elmls.setup{
 }
 fluttertools.setup{}
 lspconfig.gopls.setup{}
+lspconfig.html.setup { 
+    capabilities = capabilities,
+    cmd = { "vscode-html-language-server.cmd", "--stdio" }
+}
 lspconfig.jsonls.setup {
     cmd = { "vscode-json-languageserver.cmd", "--stdio" }
     -- commands = {
@@ -43,16 +55,19 @@ lspconfig.rescriptls.setup {
     --     require "lsp_signature".on_attach()
     -- end,
 }
-lspconfig.rls.setup {
-  settings = {
-    rust = {
-      unstable_features = true,
-      build_on_save = false,
-      all_features = true,
-    },
-  },
+-- lspconfig.rls.setup {
+--   settings = {
+--     rust = {
+--       unstable_features = true,
+--       build_on_save = false,
+--       all_features = true,
+--     },
+--   },
+-- }
+lspconfig.rust_analyzer.setup{}
+lspconfig.svelte.setup{
+  cmd = { "svelteserver.cmd", "--stdio" }
 }
---lspconfig.rust_analyzer.setup{}
 lspconfig.tsserver.setup{}
 lspconfig.vimls.setup{}
 lspconfig.vls.setup{

@@ -37,6 +37,8 @@ endif
 if has("nvim")
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'glepnir/lspsaga.nvim'
 " Plug 'ray-x/lsp_signature.nvim'
 endif
