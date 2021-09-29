@@ -45,6 +45,7 @@ nnoremap <C-P>b :Telescope buffers<CR>
 nnoremap <C-P>c :Telescope colorscheme<CR>
 nnoremap <C-P>f :Telescope file_browser<CR>
 nnoremap <C-P>h :Telescope oldfiles<CR>
+nnoremap <C-P>j :Telescope jumplist<CR>
 nnoremap <C-P>k :Telescope keymaps<CR>
 nnoremap <C-P>l :Telescope highlights<CR>
 nnoremap <C-P>m :Telescope marks<CR>
