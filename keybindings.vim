@@ -43,13 +43,15 @@ nnoremap <C-P>: :Telescope commands<CR>
 nnoremap <C-P>; :Telescope command_history<CR>
 nnoremap <C-P>b :Telescope buffers<CR>
 nnoremap <C-P>c :Telescope colorscheme<CR>
-nnoremap <C-P>f :Telescope file_browser<CR>
+nnoremap <C-P>f :Telescope fd<CR>
+nnoremap <C-P>F :Telescope file_browser<CR>
 nnoremap <C-P>h :Telescope oldfiles<CR>
 nnoremap <C-P>j :Telescope jumplist<CR>
 nnoremap <C-P>k :Telescope keymaps<CR>
 nnoremap <C-P>l :Telescope highlights<CR>
 nnoremap <C-P>m :Telescope marks<CR>
 nnoremap <C-P>r :Telescope registers<CR>
+nnoremap <C-P>s :Telescope symbols<CR>
 nnoremap <C-P>t :Telescope filetypes<CR>
 nnoremap <C-P>x :Telescope highlights<CR>
 nnoremap <silent> <C-P><space> :Telescope lsp_documents_symbols<CR>
@@ -110,8 +112,20 @@ if has("nvim")
     inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
     inoremap <silent><expr> <C-b>     compe#scroll({ 'delta': -4 })
 
-    nnoremap <silent><C-k><C-i> :Lspsaga hover_doc<CR>
-    nnoremap <silent><C-k><C-s> :Lspsaga signature_help<CR>
-    nnoremap <silent><C-k><C-f> :Lspsaga lsp_finder<CR>
+"    nnoremap <silent><C-k><C-i> :Lspsaga hover_doc<CR>
+"    nnoremap <silent><C-k><C-s> :Lspsaga signature_help<CR>
+"    nnoremap <silent><C-k><C-f> :Lspsaga lsp_finder<CR>
+
+    nnoremap <leader>kd :lua vim.lsp.buf.definition()<CR>
+    nnoremap <leader>ki :lua vim.lsp.buf.implementation()<CR>
+    nnoremap <leader>ks :lua vim.lsp.buf.signature_help()<CR>
+    nnoremap <leader>kr :lua vim.lsp.buf.references()<CR>
+    nnoremap <leader>kR :lua vim.lsp.buf.rename()<CR>
+    nnoremap <leader>kh :lua vim.lsp.buf.hover()<CR>
+    nnoremap <leader>ka :lua vim.lsp.buf.code_action()<CR>
+    nnoremap <leader>kg :lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+    nnoremap <leader>kn :lua vim.lsp.diagnostic.goto_next()<CR>
+    nnoremap <leader>kN :lua vim.lsp.diagnostic.goto_prev()<CR>
+    nnoremap <leader>kl :lua LspLocationList()<CR>
 endif
 

@@ -11,6 +11,7 @@ if has("nvim")
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-symbols.nvim'
 else
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -40,11 +41,12 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
-Plug 'glepnir/lspsaga.nvim'
+" Plug 'glepnir/lspsaga.nvim'
 " Plug 'ray-x/lsp_signature.nvim'
 endif
 
 " Lots of syntax files
+" Disable languages as needed: let g:polyglot_disabled = ['markdown']
 Plug 'sheerun/vim-polyglot'
 
 " Log files
@@ -54,18 +56,19 @@ Plug 'tjdevries/nlua.nvim'
 " Markdown -- depends on node and yarn
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 " Go
-"POLYGLOT PPlug 'fatih/vim-go'
+"POLYGLOT Plug 'fatih/vim-go'
 Plug 'sebdah/vim-delve'
 " FLutter
-"POLYGLOT PPlug 'dart-lang/dart-vim-plugin'
+"POLYGLOT Plug 'dart-lang/dart-vim-plugin'
 Plug 'akinsho/flutter-tools.nvim'
 " Rescript
 Plug 'rescript-lang/vim-rescript'
 " Rust
-"POLYGLOT PPlug 'rust-lang/rust.vim'
+"POLYGLOT Plug 'rust-lang/rust.vim'
 " V
-"POLYGLOT PPlug 'ollykel/v-vim'
+"POLYGLOT Plug 'ollykel/v-vim'
 Plug 'zakuro9715/vim-vtools' 
+"POLYGLOT Plug 'ziglang/vim'
 
 call plug#end()
 

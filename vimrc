@@ -27,7 +27,7 @@ let NERDTreeQuitOnOpen=1
 let g:BASH_Ctrl_j = 'off'
 
 set termguicolors
-set guifont=Victor\ Mono:h13
+set guifont=Victor\ Mono:h14
 set cursorline
 augroup CursorLineOnlyInActiveWindow
   autocmd!

@@ -66,7 +66,7 @@ lspconfig.rescriptls.setup {
 -- }
 lspconfig.rust_analyzer.setup{}
 lspconfig.svelte.setup{
-  cmd = { "svelteserver.cmd", "--stdio" }
+    cmd = { "svelteserver.cmd", "--stdio" }
 }
 lspconfig.tsserver.setup{}
 lspconfig.vimls.setup{}
@@ -75,6 +75,9 @@ lspconfig.vls.setup{
 }
 lspconfig.yamlls.setup{
     cmd = { "yaml-language-server.cmd", "--stdio" }
+}
+lspconfig.zls.setup{
+    cmd = { "zls.exe", "" }
 }
 
 
