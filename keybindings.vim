@@ -70,6 +70,11 @@ nnoremap <C-P>t :Filetypes<CR>
 nnoremap <C-P>w :Windows<CR>
 endif
 
+nnoremap <silent> <C-P><C-E>e Y:echo system('base64 -e', @")<CR>
+vnoremap <silent> <C-P><C-E>e y:let @"=system('base64 -e', @")<CR>gvP
+nnoremap <silent> <C-P><C-E>d Y:echo system('base64 -d', @")<CR>
+vnoremap <silent> <C-P><C-E>d y:let @"=system('base64 -d', @")<CR>gvP
+
 nnoremap <silent> <C-P><C-X> :call SwitchDarkLightThemes()<CR>
 nnoremap <silent> <Leader>x :call SynStack()<CR>h 
 if has("nvim")
