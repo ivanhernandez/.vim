@@ -3,6 +3,11 @@ let mapleader = "\<Space>"
 let g:camelcasemotion_key = '<leader>'
 nnoremap <silent> <leader><esc> <esc>:noh<CR>:echo ""<CR>
 nnoremap <silent> <C-Tab> :bnext<CR>
+nnoremap <silent> <C-S-Tab> :bprevious<CR>
+nnoremap <silent> <Tab><Tab> :bnext<CR>
+nnoremap <silent> <Tab><S-Tab> :bprevious<CR>
+nnoremap <silent> <S-Tab><S-Tab> :bprevious<CR>
+nnoremap <silent> <Tab>w :wincmd w<CR>
 
 
 " Remove previous word. Do not yank.
