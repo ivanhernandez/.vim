@@ -19,15 +19,10 @@ set expandtab autoindent smartindent
 
 set noswapfile nobackup undofile
 
-source ~/.vim/plugins.vim
-source ~/.vim/completions.vim
-source ~/.vim/keybindings.vim
-
-let NERDTreeQuitOnOpen=1
 let g:BASH_Ctrl_j = 'off'
 
 set termguicolors
-set guifont=Victor\ Mono:h14
+set guifont=IBM\ Plex\ Mono:h14 
 set cursorline
 augroup CursorLineOnlyInActiveWindow
   autocmd!
@@ -37,6 +32,17 @@ augroup END
 
 command ChangeToCurrentBufferDirectory cd %:p:h
 cabbrev cdc ChangeToCurrentBufferDirectory
+
+source  ~/.vim/plugins.vim
+source  ~/.vim/lsp-cmp.vim
+luafile ~/.vim/lsp-cmp.lua
+luafile ~/.vim/lsp-signature.lua
+source  ~/.vim/keybindings.vim
+luafile ~/.vim/gitsigns.lua
+luafile ~/.vim/which-key.lua
+source  ~/.vim/nvim-tree.vim
+luafile ~/.vim/nvim-tree.lua
+
 
 let g:curswtheme = "default"
 function SwitchDarkLightThemes()
@@ -60,11 +66,6 @@ endfunction
 
 syntax on
 call SwitchDarkLightThemes()
-
-if has("nvim")
-    lua require('gitsigns').setup()
-    lua require('which-key').setup()
-endif
 
 function! SynStack()
     if !exists("*synstack")

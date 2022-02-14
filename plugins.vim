@@ -7,16 +7,14 @@ Plug 'junegunn/vim-easy-align'
 " Plug 'justinmk/vim-sneak' " Using incsearch hlsearch is just Ok
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-if has("nvim")
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-symbols.nvim'
-else
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-endif
+Plug 'nvim-telescope/telescope-fzf-native.nvim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
 
 " Themes
 Plug 'ivanhernandez/pompeii'
@@ -29,25 +27,22 @@ Plug 'ap/vim-css-color'
 Plug 'lambdalisue/gina.vim'
 Plug 'sindrets/diffview.nvim'
 Plug 'nicwest/vim-http'
-if has("nvim")
-    " Plug 'NTBBloodbath/rest.nvim'
-    Plug 'lewis6991/gitsigns.nvim'
-endif
+" Plug 'NTBBloodbath/rest.nvim'
+Plug 'lewis6991/gitsigns.nvim'
 
 " Auto Completion/LSP 
 
-if has("nvim")
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 " Plug 'glepnir/lspsaga.nvim'
-" Plug 'ray-x/lsp_signature.nvim'
-endif
+Plug 'ray-x/lsp_signature.nvim'
 
 " Lots of syntax files
 " Disable languages as needed: let g:polyglot_disabled = ['markdown']
 Plug 'sheerun/vim-polyglot'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Log files
 "POLYGLOT Plug 'MTDL9/vim-log-highlighting'

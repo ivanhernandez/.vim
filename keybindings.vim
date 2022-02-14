@@ -33,14 +33,13 @@ vnoremap <silent> <leader>/ :Commentary<Esc>
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
-
-nnoremap <silent> <C-/> :NERDTreeToggle<CR>
-nnoremap <silent> <C-_> :NERDTreeToggle<CR>
-nnoremap <silent> <leader><C-/> :NERDTreeFind<CR>
-nnoremap <silent> <leader><C-_> :NERDTreeFind<CR>
+nnoremap <silent> <C-/> :NvimTreeToggle<CR>
+nnoremap <silent> <C-_> :NvimTreeToggle<CR>
+nnoremap <silent> <leader><C-/> :NvimTreeFindFile<CR>
+nnoremap <silent> <leader><C-_> :NvimTreeFindFile<CR>
 nnoremap <silent> <A-CR> :let g:neovide_fullscreen=!g:neovide_fullscreen<CR>
+" NvimTreeOpen, NvimTreeClose, NvimTreeFocus, NvimTreeFindFileToggle, NvimTreeRefresh and NvimTreeResize are also available if you need them
 
-if has("nvim")
 nnoremap <C-P><C-P> :Telescope current_buffer_fuzzy_find<CR>
 nnoremap <C-P><C-S-P> :Telescope live_grep<CR>
 nnoremap <C-P>/ :Telescope search_history<CR>
@@ -61,19 +60,6 @@ nnoremap <C-P>t :Telescope filetypes<CR>
 nnoremap <C-P>x :Telescope highlights<CR>
 nnoremap <silent> <C-P><space> :Telescope lsp_documents_symbols<CR>
 inoremap <silent> <C-P><space> <esc>:Telescope lsp_documents_symbols<CR>==gi
-else
-nnoremap <C-P><C-P> :BLines!<CR>
-nnoremap <C-P><C-S-P> :Lines!<CR>
-nnoremap <C-P>/ :History/<CR>
-nnoremap <C-P>: :History:<CR>
-nnoremap <C-P>; :History:<CR>
-nnoremap <C-P>b :Buffers<CR>
-nnoremap <C-P>f :Files<CR>
-nnoremap <C-P>g :Rg!<Space>
-nnoremap <C-P>h :History<CR>
-nnoremap <C-P>t :Filetypes<CR>
-nnoremap <C-P>w :Windows<CR>
-endif
 
 nnoremap <silent> <C-P><C-E>e Y:echo system('base64 -e', @")<CR>
 vnoremap <silent> <C-P><C-E>e y:let @"=system('base64 -e', @")<CR>gvP
@@ -92,15 +78,9 @@ nnoremap <C-G>a :Gina add %<CR>
 nnoremap <C-G><C-A> :Gina add .<CR>
 nnoremap <C-G>r :Gina restore --staged %<CR>
 nnoremap <C-G><C-R> :Gina restore --staged .<CR>
-if has("nvim")
 nnoremap <C-G>b :Telescope git_branches<CR>
 nnoremap <C-G>s :Telescope git_status<CR>
 nnoremap <C-G>h :Telescope git_commits<CR>
-else
-nnoremap <C-G>b :Gina branch<CR>
-nnoremap <C-G>s :Gina status<CR>
-nnoremap <C-G>h :Gina log<CR>
-endif
 
 nnoremap <silent> <A-j> :m .+1<CR>==
 nnoremap <silent> <A-k> :m .-2<CR>==
@@ -113,29 +93,27 @@ inoremap <expr> <C-k> pumvisible() ? "\<Up>" : "\<C-k>"
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-if has("nvim")
-    inoremap <silent><expr> <C-Space> compe#complete()
-    inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-    inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-    inoremap <silent><expr> <C-u>     compe#scroll({ 'delta': +4 })
-    inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-    inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-    inoremap <silent><expr> <C-b>     compe#scroll({ 'delta': -4 })
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-u>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-b>     compe#scroll({ 'delta': -4 })
 
 "    nnoremap <silent><C-k><C-i> :Lspsaga hover_doc<CR>
 "    nnoremap <silent><C-k><C-s> :Lspsaga signature_help<CR>
 "    nnoremap <silent><C-k><C-f> :Lspsaga lsp_finder<CR>
 
-    nnoremap <leader>kd :lua vim.lsp.buf.definition()<CR>
-    nnoremap <leader>ki :lua vim.lsp.buf.implementation()<CR>
-    nnoremap <leader>ks :lua vim.lsp.buf.signature_help()<CR>
-    nnoremap <leader>kr :lua vim.lsp.buf.references()<CR>
-    nnoremap <leader>kR :lua vim.lsp.buf.rename()<CR>
-    nnoremap <leader>kh :lua vim.lsp.buf.hover()<CR>
-    nnoremap <leader>ka :lua vim.lsp.buf.code_action()<CR>
-    nnoremap <leader>kg :lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
-    nnoremap <leader>kn :lua vim.lsp.diagnostic.goto_next()<CR>
-    nnoremap <leader>kN :lua vim.lsp.diagnostic.goto_prev()<CR>
-    nnoremap <leader>kl :lua LspLocationList()<CR>
-endif
+nnoremap <leader>kd :lua vim.lsp.buf.definition()<CR>
+nnoremap <leader>ki :lua vim.lsp.buf.implementation()<CR>
+nnoremap <leader>ks :lua vim.lsp.buf.signature_help()<CR>
+nnoremap <leader>kr :lua vim.lsp.buf.references()<CR>
+nnoremap <leader>kR :lua vim.lsp.buf.rename()<CR>
+nnoremap <leader>kh :lua vim.lsp.buf.hover()<CR>
+nnoremap <leader>ka :lua vim.lsp.buf.code_action()<CR>
+nnoremap <leader>kg :lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+nnoremap <leader>kn :lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <leader>kN :lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <leader>kl :lua LspLocationList()<CR>
 
