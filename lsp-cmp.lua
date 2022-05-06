@@ -1,5 +1,5 @@
 lspconfig = require'lspconfig'
-nlualsp = require'nlua.lsp.nvim'
+-- nlualsp = require'nlua.lsp.nvim'
 fluttertools = require'flutter-tools'
 
 local home = vim.fn.expand("$HOME")
@@ -7,8 +7,6 @@ local pid = vim.fn.getpid()
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-
 
 -- SUMNEKO --------------------------------------------------------------------------------------
 local system_name
@@ -22,8 +20,8 @@ else
   print("Unsupported system for sumneko")
 end
 
-local sumneko_root_path = vim.fn.stdpath('config')..'/../sumneko_lua/lua-language-server'
-local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-server"
+local sumneko_root_path = vim.fn.expand('$XDG_CONFIG_HOME') .. '/sumneko_lua/lua-language-server'
+local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-server.exe"
 
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
@@ -65,7 +63,14 @@ lspconfig.cssls.setup {
     cmd = { "vscode-css-language-server.cmd", "--stdio" }
 }
 
---lspconfig.denols.setup{}
+
+lspconfig.denols.setup {
+     on_attach = on_attach,
+     root_dir = lspconfig.util.root_pattern("deno.json"),
+     init_options = {
+       lint = true,
+     },
+}
 
 --lspconfig.dockerls.setup{}
 
@@ -93,11 +98,12 @@ lspconfig.jsonls.setup {
     -- }
 }
 
-lspconfig.nimls.setup{}
---local omnisharp_bin = "/path/to/omnisharp/OmniSharp.exe"
---lspconfig.omnisharp.setup{
---    cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
---}
+-- lspconfig.nimls.setup{}
+
+local omnisharp_bin = vim.fn.expand('$PROOT')..'vi/omnisharp-vim/omnisharp-roslyn/OmniSharp.exe'
+lspconfig.omnisharp.setup{
+    cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
+}
 
 lspconfig.rescriptls.setup {
     cmd = { "node", home .. "/.vim/plugged/vim-rescript/server/out/server.js", "--stdio" },
@@ -122,7 +128,13 @@ lspconfig.svelte.setup{
     cmd = { "svelteserver.cmd", "--stdio" }
 }
 
-lspconfig.tsserver.setup{}
+lspconfig.tsserver.setup{
+    on_attach = on_attach,
+    root_dir = lspconfig.util.root_pattern("package.json"),
+    init_options = {
+        lint = true
+    }
+}
 
 lspconfig.vimls.setup{}
 
@@ -140,12 +152,12 @@ lspconfig.zls.setup{
 
 
 
-nlualsp.setup(lspconfig, {
-  on_attach = function() end,
+-- nlualsp.setup(lspconfig, {
+--   on_attach = function() end,
 
-  -- Include globals you want to tell the LSP are real :)
-  globals = {
-    -- Colorbuddy
-    "Color", "c", "Group", "g", "s",
-  }
-})
+--   -- Include globals you want to tell the LSP are real :)
+--   globals = {
+--     -- Colorbuddy
+--     "Color", "c", "Group", "g", "s",
+--   }
+-- })

@@ -22,7 +22,7 @@ set noswapfile nobackup undofile
 let g:BASH_Ctrl_j = 'off'
 
 set termguicolors
-set guifont=IBM\ Plex\ Mono:h14 
+set guifont=BlexMono\ NF:h14 
 set cursorline
 augroup CursorLineOnlyInActiveWindow
   autocmd!
