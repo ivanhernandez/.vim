@@ -51,21 +51,24 @@ nnoremap <silent> <A-CR> :let g:neovide_fullscreen=!g:neovide_fullscreen<CR>
 
 nnoremap <leader>/ :Telescope current_buffer_fuzzy_find<CR>
 nnoremap <leader>g :Telescope live_grep<CR>
-nnoremap <leader>i/ :Telescope search_history<CR>
 nnoremap <leader>: :Telescope commands<CR>
-nnoremap <leader>; :Telescope command_history<CR>
 nnoremap <leader>b :Telescope buffers<CR>
 nnoremap <leader>c :Telescope colorscheme<CR>
 nnoremap <leader>f :Telescope fd<CR>
 nnoremap <leader>F :Telescope file_browser<CR>
-nnoremap <leader>h :Telescope oldfiles<CR>
+nnoremap <leader>H :Telescope help_tags<CR>
+nnoremap <leader>hh :Telescope help_tags<CR>
+nnoremap <leader>hk :Telescope keymaps<CR>
+nnoremap <leader>hf :Telescope oldfiles<CR>
+nnoremap <leader>hn :Telescope notify<CR>
+nnoremap <leader>h: :Telescope notify<CR>
+nnoremap <leader>h/ :Telescope search_history<CR>
 nnoremap <leader>j :Telescope jumplist<CR>
-nnoremap <leader>ik :Telescope keymaps<CR>
 nnoremap <leader>m :Telescope marks<CR>
 nnoremap <leader>r :Telescope registers<CR>
 nnoremap <leader>s :Telescope symbols<CR>
 nnoremap <leader>t :Telescope filetypes<CR>
-nnoremap <leader>ix :Telescope highlights<CR>
+" nnoremap <leader>ix :Telescope highlights<CR>
 nnoremap <silent> <C-P><space> :Telescope lsp_documents_symbols<CR>
 inoremap <silent> <C-P><space> <esc>:Telescope lsp_documents_symbols<CR>==gi
 

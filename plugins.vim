@@ -17,6 +17,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'voldikss/vim-floaterm'
+Plug 'rcarriga/nvim-notify'
 
 " Themes
 Plug 'ivanhernandez/pompeii'
@@ -45,6 +46,7 @@ Plug 'ray-x/lsp_signature.nvim'
 " Disable languages as needed: let g:polyglot_disabled = ['markdown']
 Plug 'sheerun/vim-polyglot'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
 
 " Log files
 "POLYGLOT Plug 'MTDL9/vim-log-highlighting'
