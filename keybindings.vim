@@ -36,10 +36,10 @@ nnoremap <leader>Y "+Y
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 
-nnoremap <silent? <C-j> <C-e>
-vnoremap <silent? <C-j> <C-e>
-nnoremap <silent? <C-k> <C-y>
-vnoremap <silent? <C-k> <C-y>
+nnoremap <silent> <C-j> <C-e>
+vnoremap <silent> <C-j> <C-e>
+nnoremap <silent> <C-k> <C-y>
+vnoremap <silent> <C-k> <C-y>
 
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
