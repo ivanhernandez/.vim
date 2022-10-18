@@ -1,6 +1,7 @@
-lspconfig = require'lspconfig'
--- nlualsp = require'nlua.lsp.nvim'
-fluttertools = require'flutter-tools'
+local lspconfig = require 'lspconfig'
+local configs = require 'lspconfig/configs'
+
+local fluttertools = require 'flutter-tools'
 
 local home = vim.fn.expand("$HOME")
 local pid = vim.fn.getpid()
@@ -57,6 +58,19 @@ lspconfig.sumneko_lua.setup {
 
 
 lspconfig.bashls.setup{}
+
+-- Download bicep server from https://github.com/Azure/bicep/
+local bicep_root_path = vim.fn.expand('$XDG_CONFIG_HOME') .. '/bicep-langserver'
+local bicep_binary = bicep_root_path .. "/Bicep.LangServer.exe"
+configs.bicep = { 
+  default_config = { 
+    filetypes = { "bicep" } };
+}
+lspconfig.bicep.setup {
+  on_attach = on_attach,
+  root_dir = lspconfig.util.root_pattern(".git"),
+  cmd = { bicep_binary }
+}
 
 lspconfig.cssls.setup { 
     capabilities = capabilities,
