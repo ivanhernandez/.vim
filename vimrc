@@ -15,6 +15,8 @@ set noerrorbells
 " setlocal colorcolumn=80
 
 set shiftwidth=4 tabstop=4 softtabstop=4
+set listchars=tab:»\ ,trail:~
+set list 
 set expandtab autoindent smartindent
 
 set noswapfile nobackup undofile
