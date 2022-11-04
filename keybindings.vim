@@ -10,6 +10,9 @@ nnoremap <silent> <Tab><S-Tab> :bprevious<CR>
 nnoremap <silent> <S-Tab><S-Tab> :bprevious<CR>
 nnoremap <silent> <Tab>w :wincmd w<CR>
 
+" Split line at cursor
+nnoremap <silent> K i<CR><esc>
+
 " Remove previous word. Do not yank.
 nnoremap <silent> <C-Backspace> :undojoin<CR>"_db
 inoremap <silent> <C-Backspace> <C-w>
@@ -37,10 +40,10 @@ nnoremap <leader>Y "+Y
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 
-nnoremap <silent> <C-j> <C-e>
-vnoremap <silent> <C-j> <C-e>
-nnoremap <silent> <C-k> <C-y>
-vnoremap <silent> <C-k> <C-y>
+nnoremap <silent> <C-j> 3<C-e>
+vnoremap <silent> <C-j> 3<C-e>
+nnoremap <silent> <C-k> 3<C-y>
+vnoremap <silent> <C-k> 3<C-y>
 
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
