@@ -1,6 +1,7 @@
 let mapleader = "\<Space>"
 
 let g:camelcasemotion_key = '\'
+tnoremap <silent> <S-esc> <C-\><C-N>
 nnoremap <silent> <leader><esc> <esc>:noh<CR>:echo ""<CR>
 nnoremap <silent> <C-Tab> :bnext<CR>
 nnoremap <silent> <C-S-Tab> :bprevious<CR>
