@@ -23,6 +23,10 @@ set noswapfile nobackup undofile
 
 let g:BASH_Ctrl_j = 'off'
 
+let g:vfmt = 0
+set completeopt=menuone,noselect
+set shortmess+=c
+
 set termguicolors
 "set guifont=BlexMono\ NF:h14
 set guifont=GoMono\ NF:h14
@@ -37,15 +41,16 @@ command ChangeToCurrentBufferDirectory cd %:p:h
 cabbrev cdc ChangeToCurrentBufferDirectory
 
 source  ~/.vim/plugins.vim
-source  ~/.vim/lsp-cmp.vim
-luafile ~/.vim/lsp-cmp.lua
+luafile ~/.vim/cmp.lua
+luafile ~/.vim/lspconfig.lua
 luafile ~/.vim/lsp-signature.lua
 source  ~/.vim/keybindings.vim
 luafile ~/.vim/gitsigns.lua
 luafile ~/.vim/which-key.lua
-source  ~/.vim/nvim-tree.vim
 luafile ~/.vim/nvim-tree.lua
 
+" a list of groups can be found at `:help nvim_tree_highlight`
+"highlight NvimTreeFolderIcon guibg=blueA
 
 let g:curswtheme = "default"
 function SwitchDarkLightThemes()

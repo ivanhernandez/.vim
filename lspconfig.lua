@@ -6,7 +6,8 @@ local fluttertools = require 'flutter-tools'
 local home = vim.fn.expand("$HOME")
 local pid = vim.fn.getpid()
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- From `compe`:  local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- SUMNEKO --------------------------------------------------------------------------------------
@@ -29,6 +30,7 @@ table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
 lspconfig.sumneko_lua.setup {
+  capabilities = capabilities,
   cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
   settings = {
     Lua = {
@@ -57,7 +59,9 @@ lspconfig.sumneko_lua.setup {
 
 
 
-lspconfig.bashls.setup{}
+lspconfig.bashls.setup{
+  capabilities = capabilities,
+}
 
 -- Download bicep server from https://github.com/Azure/bicep/
 local bicep_root_path = vim.fn.expand('$XDG_CONFIG_HOME') .. '/bicep-langserver'
@@ -67,34 +71,40 @@ configs.bicep = {
     filetypes = { "bicep" } };
 }
 lspconfig.bicep.setup {
+  capabilities = capabilities,
   on_attach = on_attach,
   root_dir = lspconfig.util.root_pattern(".git"),
   cmd = { bicep_binary }
 }
 
-lspconfig.cssls.setup { 
+lspconfig.cssls.setup {
     capabilities = capabilities,
     cmd = { "vscode-css-language-server.cmd", "--stdio" }
 }
 
 
 lspconfig.denols.setup {
-     on_attach = on_attach,
-     root_dir = lspconfig.util.root_pattern("deno.json"),
-     init_options = {
-       lint = true,
-     },
+    capabilities = capabilites,
+  on_attach = on_attach,
+  root_dir = lspconfig.util.root_pattern("deno.json"),
+  init_options = {
+    lint = true,
+  },
 }
 
 --lspconfig.dockerls.setup{}
 
 lspconfig.elmls.setup{
+    capabilities = capabilities,
     cmd = { "elm-language-server.cmd" }
 }
 
-fluttertools.setup{}
+fluttertools.setup{
+}
 
-lspconfig.gopls.setup{}
+lspconfig.gopls.setup{
+    capabilities = capabilities,
+}
 
 lspconfig.html.setup { 
     capabilities = capabilities,
@@ -102,6 +112,7 @@ lspconfig.html.setup {
 }
 
 lspconfig.jsonls.setup {
+    capabilities = capabilities,
     cmd = { "vscode-json-languageserver.cmd", "--stdio" }
     -- commands = {
     --   Format = {
@@ -116,10 +127,12 @@ lspconfig.jsonls.setup {
 
 local omnisharp_bin = vim.fn.expand('$PROOT')..'vi/omnisharp-vim/omnisharp-roslyn/OmniSharp.exe'
 lspconfig.omnisharp.setup{
+    capabilities = capabilities,
     cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
 }
 
 lspconfig.rescriptls.setup {
+    capabilities = capabilities,
     cmd = { "node", home .. "/.vim/plugged/vim-rescript/server/out/server.js", "--stdio" },
     -- on_attach = function(client, bufnr)
     --     require "lsp_signature".on_attach()
@@ -136,13 +149,17 @@ lspconfig.rescriptls.setup {
 --   },
 -- }
 
-lspconfig.rust_analyzer.setup{}
+lspconfig.rust_analyzer.setup{
+    capabilities = capabilities,
+}
 
 lspconfig.svelte.setup{
+    capabilities = capabilities,
     cmd = { "svelteserver.cmd", "--stdio" }
 }
 
 lspconfig.tsserver.setup{
+    capabilities = capabilities,
     on_attach = on_attach,
     root_dir = lspconfig.util.root_pattern("package.json"),
     init_options = {
@@ -150,17 +167,22 @@ lspconfig.tsserver.setup{
     }
 }
 
-lspconfig.vimls.setup{}
+lspconfig.vimls.setup{
+    capabilities = capabilities,
+}
 
 lspconfig.vls.setup{
+    capabilities = capabilities,
     cmd = { "vls.exe", "" }
 }
 
 lspconfig.yamlls.setup{
+    capabilities = capabilities,
     cmd = { "yaml-language-server.cmd", "--stdio" }
 }
 
 lspconfig.zls.setup{
+    capabilities = capabilities,
     cmd = { "zls.exe", "" }
 }
 

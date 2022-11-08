@@ -21,7 +21,7 @@ Plug 'rcarriga/nvim-notify'
 
 " Themes
 Plug 'ivanhernandez/pompeii'
-Plug 'wojciechkepka/bogster' 
+Plug 'wojciechkepka/bogster'
 Plug 'sdothum/vim-colors-duochrome'
 
 " Niceties
@@ -36,7 +36,13 @@ Plug 'lewis6991/gitsigns.nvim'
 " Auto Completion/LSP 
 
 Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-compe'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/cmp-emoji'
+Plug 'hrsh7th/cmp-nvim-lsp-document-symbol'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 " Plug 'glepnir/lspsaga.nvim'
