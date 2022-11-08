@@ -107,12 +107,13 @@ vnoremap <silent> <A-j> :m '>+1<CR>gv=gv
 vnoremap <silent> <A-k> :m '<-2<CR>gv=gv
 inoremap <silent> <A-j> <Esc>:m .+1<CR>==gi
 inoremap <silent> <A-k> <Esc>:m .-2<CR>==gi
-inoremap <expr> <C-j> pumvisible() ? "\<Down>" : "\<C-j>"
-inoremap <expr> <C-k> pumvisible() ? "\<Up>" : "\<C-k>"
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
 
 " KEY BINDINGS FOR CMP MOVED INTO CMP SETTINGS
+" inoremap <expr> <C-j> pumvisible() ? "\<Down>" : "\<C-j>"
+" inoremap <expr> <C-k> pumvisible() ? "\<Up>" : "\<C-k>"
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " inoremap <silent><expr> <C-Space> compe#complete()
 " inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 " inoremap <silent><expr> <C-e>     compe#close('<C-e>')
