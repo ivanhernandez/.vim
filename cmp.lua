@@ -1,6 +1,6 @@
 local cmp = require 'cmp'
 
-cmp.setup({
+cmp.setup{
   preselect = true,
   confirmation = { completeopt = 'menu,menuone' },
   snippet = {
@@ -22,18 +22,18 @@ cmp.setup({
       ['<C-d>'] = cmp.mapping.scroll_docs(-3),
       ['<C-u>'] = cmp.mapping.scroll_docs(3),
       ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-k>'] = cmp.mapping.complete(),
+      ['<C-h>'] = cmp.mapping.complete(),
       ['<esc>'] = cmp.mapping.close(),
       ['<C-e>'] = cmp.mapping.close(),
       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
    }),
-   sources = cmp.config.sources({
+   sources = cmp.config.sources{
      { name = 'nvim_lsp' },
      { name = 'vsnip' },
    }, {
      { name = 'buffer' },
-   })
-})
+   }
+}
 
 -- Set configuration for specific filetype.
 cmp.setup.filetype('gitcommit', {
