@@ -24,7 +24,7 @@ set noswapfile nobackup undofile
 let g:BASH_Ctrl_j = 'off'
 
 let g:vfmt = 0
-"set completeopt=menu,menuone,noinsert,noselect
+set completeopt=menu,menuone,noselect
 set shortmess+=c
 
 set termguicolors

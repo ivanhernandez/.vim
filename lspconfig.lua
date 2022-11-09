@@ -13,13 +13,13 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- SUMNEKO --------------------------------------------------------------------------------------
 local system_name
 if vim.fn.has("mac") == 1 then
-  system_name = "macOS"
+    system_name = "macOS"
 elseif vim.fn.has("unix") == 1 then
-  system_name = "Linux"
+    system_name = "Linux"
 elseif vim.fn.has('win32') == 1 then
-  system_name = "Windows"
+    system_name = "Windows"
 else
-  print("Unsupported system for sumneko")
+    print("Unsupported system for sumneko")
 end
 
 local sumneko_root_path = vim.fn.expand('$XDG_CONFIG_HOME') .. '/sumneko_lua/lua-language-server'
@@ -30,66 +30,70 @@ table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
 lspconfig.sumneko_lua.setup {
-  capabilities = capabilities,
-  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-        -- Setup your lua path
-        path = runtime_path,
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
+    capabilities = capabilities,
+    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT',
+                -- Setup your lua path
+                path = runtime_path,
+            },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = {'vim'},
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = vim.api.nvim_get_runtime_file("", true),
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {
+                enable = false,
+            },
+        },
     },
-  },
 }
 --- -----------------------------------------------
 
 
 
 lspconfig.bashls.setup{
-  capabilities = capabilities,
+    capabilities = capabilities,
 }
 
 -- Download bicep server from https://github.com/Azure/bicep/
 local bicep_root_path = vim.fn.expand('$XDG_CONFIG_HOME') .. '/bicep-langserver'
 local bicep_binary = bicep_root_path .. "/Bicep.LangServer.exe"
 configs.bicep = { 
-  default_config = { 
-    filetypes = { "bicep" } };
+    default_config = { 
+        filetypes = { "bicep" } };
 }
 lspconfig.bicep.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  root_dir = lspconfig.util.root_pattern(".git"),
-  cmd = { bicep_binary }
+    capabilities = capabilities,
+    on_attach = on_attach,
+    root_dir = lspconfig.util.root_pattern(".git"),
+    cmd = { bicep_binary }
 }
 
 lspconfig.cssls.setup {
     capabilities = capabilities,
-    cmd = { "vscode-css-language-server.cmd", "--stdio" }
+    cmd = { "vscode-css-language-server.cmd", "--stdio" },
 }
 
+lspconfig.clangd.setup {
+    capabilities = capabilities,
+    cmd = { "clangd", "--background-index" },
+}
 
 lspconfig.denols.setup {
     capabilities = capabilites,
-  on_attach = on_attach,
-  root_dir = lspconfig.util.root_pattern("deno.json"),
-  init_options = {
-    lint = true,
-  },
+    on_attach = on_attach,
+    root_dir = lspconfig.util.root_pattern("deno.json"),
+    init_options = {
+        lint = true,
+    },
 }
 
 --lspconfig.dockerls.setup{}
@@ -126,7 +130,7 @@ lspconfig.jsonls.setup {
 -- lspconfig.nimls.setup{}
 
 local omnisharp_bin = vim.fn.expand('$PROOT')..'vi/omnisharp-vim/omnisharp-roslyn/OmniSharp.exe'
-lspconfig.omnisharp.setup{
+lspconfig.omnisharp.setup {
     capabilities = capabilities,
     cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
 }

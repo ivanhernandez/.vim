@@ -2,7 +2,7 @@ local cmp = require 'cmp'
 
 cmp.setup{
   preselect = true,
-  confirmation = { completeopt = 'menu,menuone' },
+  confirmation = { completeopt = 'menu,menuone,noselect' },
   snippet = {
     expand = function(args)
       vim.fn["vsnip#anonymous"](args.body)
@@ -23,7 +23,7 @@ cmp.setup{
       ['<C-u>'] = cmp.mapping.scroll_docs(3),
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-h>'] = cmp.mapping.complete(),
-      ['<esc>'] = cmp.mapping.close(),
+      --['<esc>'] = cmp.mapping.close(),  -- This is a bit annoying
       ['<C-e>'] = cmp.mapping.close(),
       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
    }),
