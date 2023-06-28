@@ -1,6 +1,7 @@
 local lspconfig = require 'lspconfig'
 local configs = require 'lspconfig/configs'
 
+
 local fluttertools = require 'flutter-tools'
 
 local home = vim.fn.expand("$HOME")
@@ -10,7 +11,7 @@ local pid = vim.fn.getpid()
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
--- SUMNEKO --------------------------------------------------------------------------------------
+-- LUA_LS --------------------------------------------------------------------------------------
 local system_name
 if vim.fn.has("mac") == 1 then
     system_name = "macOS"
@@ -19,19 +20,19 @@ elseif vim.fn.has("unix") == 1 then
 elseif vim.fn.has('win32') == 1 then
     system_name = "Windows"
 else
-    print("Unsupported system for sumneko")
+    print("Unsupported system for lua-language-server")
 end
 
-local sumneko_root_path = vim.fn.expand('$XDG_CONFIG_HOME') .. '/sumneko_lua/lua-language-server'
-local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-server.exe"
+local lua_ls_root_path = vim.fn.expand('$XDG_CONFIG_HOME') .. '/lua-ls/lua-language-server'
+local lua_ls_binary = lua_ls_root_path.."/bin/"..system_name.."/lua-language-server.exe"
 
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-lspconfig.sumneko_lua.setup {
+lspconfig.lua_ls.setup {
     capabilities = capabilities,
-    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
+    cmd = {lua_ls_binary, "-E", lua_ls_root_path .. "/main.lua"};
     settings = {
         Lua = {
             runtime = {
