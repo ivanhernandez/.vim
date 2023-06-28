@@ -77,6 +77,12 @@ lspconfig.bicep.setup {
     cmd = { bicep_binary }
 }
 
+-- local csharp_ls_root_path = home .. '/.dotnet/tools/.store/csharp-ls/0.8.0/csharp-ls/0.8.0/tools/net7.0/any'
+-- local csharp_ls_binary = csharp_ls_root_path .. "/CSharpLanguageServer.dll"
+-- lspconfig.csharp_ls.setup{
+--     cmd = { "dotnet",  csharp_ls_binary }
+-- }
+
 lspconfig.cssls.setup {
     capabilities = capabilities,
     cmd = { "vscode-css-language-server.cmd", "--stdio" },
@@ -129,10 +135,33 @@ lspconfig.jsonls.setup {
 
 -- lspconfig.nimls.setup{}
 
-local omnisharp_bin = vim.fn.expand('$PROOT')..'vi/omnisharp-vim/omnisharp-roslyn/OmniSharp.exe'
-lspconfig.omnisharp.setup {
-    capabilities = capabilities,
-    cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
+local omnisharp_root_path = vim.fn.expand('$XDG_CONFIG_HOME') .. '\\omnisharp-roslyn-net6.0'
+local omnisharp_binary = omnisharp_root_path .. "\\OmniSharp.dll"
+lspconfig.omnisharp.setup{
+    cmd = { "dotnet", omnisharp_binary },
+    on_attach = function (client, bufnr)
+        -- https://github.com/OmniSharp/omnisharp-roslyn/issues/2483#issuecomment-1492605642
+        local tokenModifiers = client.server_capabilities.semanticTokensProvider.legend.tokenModifiers
+        for i, v in ipairs(tokenModifiers) do
+          tmp = string.gsub(v, ' ', '_')
+          tokenModifiers[i] = string.gsub(tmp, '-_', '')
+        end
+        local tokenTypes = client.server_capabilities.semanticTokensProvider.legend.tokenTypes
+        for i, v in ipairs(tokenTypes) do
+          tmp = string.gsub(v, ' ', '_')
+          tokenTypes[i] = string.gsub(tmp, '-_', '')
+        end
+        on_attach(client, bufnr)
+    end,
+    analyze_open_documents_only = false,
+    enable_editorconfig_support = true,
+    -- enable_import_completion = false,
+    -- enable_ms_build_load_projects_on_demand = false,
+    -- enable_roslyn_analyzers = false,
+    -- organize_imports_on_format = false,
+    -- sdk_include_prereleases = true,
+    filetypes = { "cs", "cshtml", "fs", "csx", "fsx", "blazor"}
+    --root_dir = [[root_pattern(".sln") or root_pattern(".csproj")]]
 }
 
 lspconfig.rescriptls.setup {
@@ -187,7 +216,7 @@ lspconfig.yamlls.setup{
 
 lspconfig.zls.setup{
     capabilities = capabilities,
-    cmd = { "zls.exe", "" }
+    cmd = { "zls.exe"}
 }
 
 

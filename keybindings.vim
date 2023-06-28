@@ -69,7 +69,7 @@ nnoremap <leader>hh :Telescope help_tags<CR>
 nnoremap <leader>hk :Telescope keymaps<CR>
 nnoremap <leader>hf :Telescope oldfiles<CR>
 nnoremap <leader>hn :Telescope notify<CR>
-nnoremap <leader>h: :Telescope notify<CR>
+nnoremap <leader>h: :Telescope command_history<CR>
 nnoremap <leader>h/ :Telescope search_history<CR>
 nnoremap <leader>j :Telescope jumplist<CR>
 nnoremap <leader>m :Telescope marks<CR>
@@ -128,16 +128,26 @@ inoremap <silent> <A-k> <Esc>:m .-2<CR>==gi
 
 nnoremap <silent> <leader>kc :Commentary<Esc>
 vnoremap <silent> <leader>kc :Commentary<Esc>
-nnoremap <leader>kd :lua vim.lsp.buf.definition()<CR>
-nnoremap <leader>ki :lua vim.lsp.buf.implementation()<CR>
-nnoremap <leader>ks :lua vim.lsp.buf.signature_help()<CR>
-nnoremap <leader>kr :lua vim.lsp.buf.references()<CR>
-nnoremap <leader>kR :lua vim.lsp.buf.rename()<CR>
+nnoremap <leader>kt <cmd>TroubleToggle lsp_type_definitions<CR>
+nnoremap <leader>kd <cmd>TroubleToggle lsp_definitions<CR>
+nnoremap <leader>kD :lua vim.lsp.buf.definition()<CR>
+nnoremap <leader>ki <cmd>TroubleToggle lsp_implementations<CR>
+nnoremap <leader>kI :lua vim.lsp.buf.implementation()<CR>
 nnoremap <leader>kh :lua vim.lsp.buf.hover()<CR>
+nnoremap <leader>ks :lua vim.lsp.buf.signature_help()<CR>
+nnoremap <leader>kr <cmd>TroubleToggle lsp_references<CR>
+nnoremap <leader>kR :lua vim.lsp.buf.references()<CR>
+nnoremap <leader>kl <cmd>TroubleToggle loclist<CR>
+nnoremap <leader>kL :lua LspLocationList()<CR>
+nnoremap <leader>ke  :lua vim.lsp.buf.rename()<CR>
 nnoremap <leader>ka :lua vim.lsp.buf.code_action()<CR>
+nnoremap <leader>kk <cmd>TroubleToggle<CR>
+nnoremap <leader>km <cmd>TroubleToggle document_diagnostics<CR>
+nnoremap <leader>kw <cmd>TroubleToggle workspace_diagnostics<CR>
+nnoremap <leader>kq <cmd>TroubleToggle quickfix<CR>
+nnoremap <leader>kT <cmd>TroubleToggle telescope<CR>
 nnoremap <leader>kg :lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 nnoremap <leader>kn :lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <leader>kN :lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <leader>kp :lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <leader>kl :lua LspLocationList()<CR>
 

@@ -13,9 +13,9 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope-symbols.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'kyazdani42/nvim-tree.lua'
+" Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'nvim-tree/nvim-tree.lua'
 Plug 'voldikss/vim-floaterm'
 Plug 'rcarriga/nvim-notify'
 
@@ -25,6 +25,7 @@ Plug 'wojciechkepka/bogster'
 Plug 'sdothum/vim-colors-duochrome'
 
 " Niceties
+Plug 'folke/trouble.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'ap/vim-css-color'
 Plug 'lambdalisue/gina.vim'
@@ -62,7 +63,7 @@ Plug 'nvim-treesitter/playground'
 " Markdown -- depends on node and yarn
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 " C#
-Plug 'OmniSharp/omnisharp-vim'
+"POLYGLOT Plug 'OmniSharp/omnisharp-vim'
 " Go
 "POLYGLOT Plug 'fatih/vim-go'
 Plug 'sebdah/vim-delve'
