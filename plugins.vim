@@ -4,7 +4,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'bkad/CamelCaseMotion'
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/vim-easy-align'
-" Plug 'justinmk/vim-sneak' " Using incsearch hlsearch is just Ok
+Plug 'justinmk/vim-sneak' " Using incsearch hlsearch should Ok. Substitute lines with 'cc' instead of 'S'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'nvim-lua/popup.nvim'
@@ -13,7 +13,6 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope-symbols.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim'
-" Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'voldikss/vim-floaterm'
