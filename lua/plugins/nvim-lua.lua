@@ -1,0 +1,4 @@
+-- return {
+--	 { 'nvim-lua/plenary.nvim', priority = 1000 }
+--	,{ 'nvim-lua/popup.nvim', priority = 1000, dependencies = { 'nvim-lua/plenary.nvim' } }
+--}

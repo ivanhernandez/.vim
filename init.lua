@@ -1,15 +1,50 @@
-local lspconfig = require 'lspconfig'
-local configs = require 'lspconfig/configs'
+require "options"
+
+local github = function(x) return 'https://github.com/' .. x end
+
+vim.pack.add({
+     { src = github('nvim-lua/plenary.nvim') }
+    ,{ src = github('nvim-lua/popup.nvim') }
+})
+
+-- BOOTSTRAP LAZY.NVIM
+-- local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+-- if not vim.loop.fs_stat(lazypath) then
+--   vim.fn.system({
+--     "git",
+--     "clone",
+--     "--filter=blob:none",
+--     "https://github.com/folke/lazy.nvim.git",
+--     "--branch=stable", -- latest stable release
+--     lazypath,
+--   })
+-- end
+-- vim.opt.rtp:prepend(lazypath)
+-- 
+-- require("lazy").setup("plugins")
+
+require "plugins/colorschemes"
+require "plugins/git"
+require "plugins/lsp"
+require "plugins/mini"
+require "plugins/nvim-tree"
+require "plugins/telescope"
+require "plugins/utilities"
+
+require "commands"
 
 
-local fluttertools = require 'flutter-tools'
+-- lspconfig -------------------------------------------------------
 
 local home = vim.fn.expand("$HOME")
 local pid = vim.fn.getpid()
 
--- From `compe`:  local capabilities = vim.lsp.protocol.make_client_capabilities()
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+--[[ 
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+capabilities.textDocument.completion.completionItem.snippetSupport = true    -- from compe
+--capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true      -- from markdown_oxide
+--]]
 
 -- LUA_LS --------------------------------------------------------------------------------------
 local system_name
@@ -30,7 +65,7 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-lspconfig.lua_ls.setup {
+vim.lsp.config("lua_ls", {
     capabilities = capabilities,
     cmd = {lua_ls_binary, "-E", lua_ls_root_path .. "/main.lua"};
     settings = {
@@ -55,28 +90,30 @@ lspconfig.lua_ls.setup {
             },
         },
     },
-}
+})
+
 --- -----------------------------------------------
 
 
-
-lspconfig.bashls.setup{
+vim.lsp.config("bashls", {
     capabilities = capabilities,
-}
+})
+vim.lsp.enable("bashls")
 
 -- Download bicep server from https://github.com/Azure/bicep/
 local bicep_root_path = vim.fn.expand('$XDG_CONFIG_HOME') .. '/bicep-langserver'
 local bicep_binary = bicep_root_path .. "/Bicep.LangServer.exe"
-configs.bicep = { 
-    default_config = { 
-        filetypes = { "bicep" } };
-}
-lspconfig.bicep.setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-    root_dir = lspconfig.util.root_pattern(".git"),
-    cmd = { bicep_binary }
-}
+
+-- require 'lspconfig/configs'.bicep = { 
+--     default_config = { 
+--         filetypes = { "bicep" } };
+-- }
+-- lspconfig.bicep.setup {
+--     capabilities = capabilities,
+--     on_attach = on_attach,
+--     root_dir = lspconfig.util.root_pattern(".git"),
+--     cmd = { bicep_binary }
+-- }
 
 -- local csharp_ls_root_path = home .. '/.dotnet/tools/.store/csharp-ls/0.8.0/csharp-ls/0.8.0/tools/net7.0/any'
 -- local csharp_ls_binary = csharp_ls_root_path .. "/CSharpLanguageServer.dll"
@@ -84,45 +121,42 @@ lspconfig.bicep.setup {
 --     cmd = { "dotnet",  csharp_ls_binary }
 -- }
 
-lspconfig.cssls.setup {
+vim.lsp.config("cssls", {
     capabilities = capabilities,
     cmd = { "vscode-css-language-server.cmd", "--stdio" },
-}
+})
+vim.lsp.enable("cssls")
 
-lspconfig.clangd.setup {
+vim.lsp.config("clangd", {
     capabilities = capabilities,
     cmd = { "clangd", "--background-index" },
-}
+})
+vim.lsp.enable("clangd")
 
-lspconfig.denols.setup {
+vim.lsp.config("denols", {
     capabilities = capabilites,
     on_attach = on_attach,
-    root_dir = lspconfig.util.root_pattern("deno.json"),
+    root_dir = require('lspconfig').util.root_pattern("deno.json"),
     init_options = {
         lint = true,
     },
-}
+})
+vim.lsp.enable("denols")
 
---lspconfig.dockerls.setup{}
+--vim.lsp.enable("dockerls")
 
-lspconfig.elmls.setup{
+vim.lsp.config("gopls", {
     capabilities = capabilities,
-    cmd = { "elm-language-server.cmd" }
-}
+})
+vim.lsp.enable("gopls")
 
-fluttertools.setup{
-}
-
-lspconfig.gopls.setup{
-    capabilities = capabilities,
-}
-
-lspconfig.html.setup { 
+vim.lsp.config("html", { 
     capabilities = capabilities,
     cmd = { "vscode-html-language-server.cmd", "--stdio" }
-}
+})
+vim .lsp.enable("html")
 
-lspconfig.jsonls.setup {
+vim.lsp.config("jsonls", {
     capabilities = capabilities,
     cmd = { "vscode-json-languageserver.cmd", "--stdio" }
     -- commands = {
@@ -132,13 +166,21 @@ lspconfig.jsonls.setup {
     --     end
     --   }
     -- }
-}
+})
+vim.lsp.enable("jsonls")
 
--- lspconfig.nimls.setup{}
+vim.lsp.config("markdown_oxide", {
+    capabilities = capabilities,
+    cmd = { 'markdown-oxide' },
+    filetypes = { 'markdown' },
+    root_markers = { '.git', '.obsidian', '.moxide.toml' },
+})
+vim.lsp.enable("markdown_oxide")
+
 
 local omnisharp_root_path = vim.fn.expand('$XDG_CONFIG_HOME') .. '\\omnisharp-roslyn-net6.0'
 local omnisharp_binary = omnisharp_root_path .. "\\OmniSharp.dll"
-lspconfig.omnisharp.setup{
+vim.lsp.config("omnisharp", {
     cmd = { "dotnet", omnisharp_binary },
     on_attach = function (client, bufnr)
         -- https://github.com/OmniSharp/omnisharp-roslyn/issues/2483#issuecomment-1492605642
@@ -163,71 +205,49 @@ lspconfig.omnisharp.setup{
     -- sdk_include_prereleases = true,
     filetypes = { "cs", "cshtml", "fs", "csx", "fsx", "blazor"}
     --root_dir = [[root_pattern(".sln") or root_pattern(".csproj")]]
-}
+})
+vim.lsp.enable("omnisharp")
 
-lspconfig.rescriptls.setup {
+vim.lsp.config("rust_analyzer", {
     capabilities = capabilities,
-    cmd = { "node", home .. "/.vim/plugged/vim-rescript/server/out/server.js", "--stdio" },
-    -- on_attach = function(client, bufnr)
-    --     require "lsp_signature".on_attach()
-    -- end,
-}
+})
+vim.lsp.enable("rust_analyzer")
 
--- lspconfig.rls.setup {
---   settings = {
---     rust = {
---       unstable_features = true,
---       build_on_save = false,
---       all_features = true,
---     },
---   },
--- }
-
-lspconfig.rust_analyzer.setup{
-    capabilities = capabilities,
-}
-
-lspconfig.svelte.setup{
+vim.lsp.config("svelte", {
     capabilities = capabilities,
     cmd = { "svelteserver.cmd", "--stdio" }
-}
+})
+vim.lsp.enable("svelte")
 
-lspconfig.tsserver.setup{
+vim.lsp.config("tsserver", {
     capabilities = capabilities,
     on_attach = on_attach,
-    root_dir = lspconfig.util.root_pattern("package.json"),
+    root_dir = require('lspconfig').util.root_pattern("package.json"),
     init_options = {
         lint = true
     }
-}
+})
+vim.lsp.enable("tsserver")
 
-lspconfig.vimls.setup{
+vim.lsp.config("vimls", {
     capabilities = capabilities,
-}
+})
+vim.lsp.enable("vimls")
 
-lspconfig.vls.setup{
-    capabilities = capabilities,
-    cmd = { "vls.exe", "" }
-}
-
-lspconfig.yamlls.setup{
+vim.lsp.config("yamlls", {
     capabilities = capabilities,
     cmd = { "yaml-language-server.cmd", "--stdio" }
-}
+})
+vim.lsp.enable("yamlls")
 
-lspconfig.zls.setup{
+vim.lsp.config("zls", {
     capabilities = capabilities,
-    cmd = { "zls.exe"}
-}
+    cmd = { "zls.exe" }
+})
+vim.lsp.enable("zls")
 
+---------------------------------------------------------------------
 
+require("keybindings")
 
--- nlualsp.setup(lspconfig, {
---   on_attach = function() end,
-
---   -- Include globals you want to tell the LSP are real :)
---   globals = {
---     -- Colorbuddy
---     "Color", "c", "Group", "g", "s",
---   }
--- })
+switchDarkLightThemes()

@@ -1,19 +1,18 @@
--- following options are the default
--- each of these are documented in `:help nvim-tree.OPTION_NAME`
-require'nvim-tree'.setup {
+local github = function(x) return 'https://github.com/' .. x end
+
+vim.pack.add {
+     { src = github 'nvim-tree/nvim-web-devicons' }
+    ,{ src = github 'nvim-tree/nvim-tree.lua' }
+}
+
+
+require 'nvim-tree' .setup {
   create_in_closed_folder = false,
   disable_netrw       = true,
-  hijack_netrw        = true,
-  --open_on_setup       = false,
-  --ignore_ft_on_setup  = {},
   open_on_tab         = false,
   hijack_cursor       = false,
   update_cwd          = false,
   respect_buf_cwd     = true,
-  -- update_to_buf_dir   = {
-  --   enable = true,
-  --   auto_open = true,
-  -- },
   diagnostics = {
     enable = false,
     icons = {
@@ -43,12 +42,7 @@ require'nvim-tree'.setup {
   },
   view = {
     width = 30,
-    hide_root_folder = false,
     side = 'left',
-    mappings = {
-      custom_only = false,
-      list = {}
-    },
     number = false,
     relativenumber = false,
     signcolumn = "yes"
@@ -96,6 +90,7 @@ require'nvim-tree'.setup {
     highlight_opened_files = 'icon',
     highlight_git = true,
     root_folder_modifier = ':~',
-    special_files = { 'Cargo.toml', 'readme.md', 'Readme.md', 'README.MD', 'README.md', 'Makefile', 'MAKEFILE' }
+    special_files = { 'Cargo.toml', 'readme.md', 'Readme.md', 'README.MD', 'README.md', 'Makefile', 'MAKEFILE', 'build.zig' }
   }
 }
+
